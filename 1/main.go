@@ -21,8 +21,6 @@ func readStdin() ([]int, error) {
 	return in, nil
 }
 
-const problem = 1.1
-
 func findTerm(sum, left int, terms []int) (term, at int) {
 	for j := len(terms) - 1; j >= 0; j-- {
 		right := terms[j]
@@ -35,7 +33,7 @@ func findTerm(sum, left int, terms []int) (term, at int) {
 
 		if tot == sum {
 			return right, j
-		} else if problem == 1.0 && tot < sum {							
+		} else if tot < sum {							
 			return -1, -1
 		}
 	}
