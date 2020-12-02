@@ -21,6 +21,27 @@ func readStdin() ([]int, error) {
 	return in, nil
 }
 
+const problem = 1.1
+
+func findTerm(sum, left int, terms []int) (term, at int) {
+	for j := len(terms) - 1; j >= 0; j-- {
+		right := terms[j]
+
+		tot := left + right
+
+		if j % 10 == 0 {
+			//fmt.Println(i, cur, j, rev, tot)
+		}
+
+		if tot == sum {
+			return right, j
+		} else if problem == 1.0 && tot < sum {							
+			return -1, -1
+		}
+	}
+	return -1, -1
+}
+
 func main() {
 	in, err := readStdin()
 	if err != nil {
@@ -28,25 +49,14 @@ func main() {
 		return
 	}
 
-	cnt := 0
 	for i := 0; i < len(in); i++ {
-		cur := in[i]
-		for j := len(in) - 1; j > i; j-- {
-			rev := in[j]
-
-			cnt++
-			tot := cur + rev
-			if tot == 2020 {
-				fmt.Println("match", i, cur, j, rev, tot, cur * rev)
-			} else if tot < 2020 {
-				fmt.Println("skip", i, cur, j, rev, tot)
-				break
-			} else if j % 10 == 0 {
-				//fmt.Println(i, cur, j, rev, tot)
-			}
+		left := in[i]
+		right, at := findTerm(2020, left, in[i+1:])
+		if at < 0 {
+			continue	
 		}
-	}
 
-	fmt.Println("done", cnt)
+		fmt.Println(i, left, at, right, left + right, left * right)
+	}
 }
 
