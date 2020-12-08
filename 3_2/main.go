@@ -19,22 +19,23 @@ func processMap(m Map, right, down int) int {
 	cnt := 0
 	col := 0
 
-	m = m[1:]
+	fmt.Println("map:", len(m), "x", len(m[0]))
+	next := down
 
-	for n, txt := range m {
-		if n % down != 0 {
-			fmt.Println(right, down, n, "skip")
+	for n, txt := range m {		
+		if n != next {
 			continue
 		}
-		//row := n + 1
+		
 		col += right
 
 		cur := txt[col % len(txt)]
-		//fmt.Println(row, col, col % len(txt), string(cur), len(txt))
 
 		if cur == '#' {
 			cnt++
 		}
+
+		next += down
 	}
 
 	return cnt
@@ -48,6 +49,10 @@ func main() {
 	r5d1 := processMap(m, 5, 1)
 	r7d1 := processMap(m, 7, 1)
 	r1d2 := processMap(m, 1, 2)
+
+	fmt.Println(31, 31 % 1, 31 % 3, 31 % 5, 31 % 7, 31 % 1)
+	fmt.Println(66, 66 % 1, 66 % 3, 66 % 5, 66 % 7, 66 % 1)
+	fmt.Println(323 % 2)
 
 	fmt.Println(r1d1, r3d1, r5d1, r7d1, r1d2)
 	fmt.Println(r1d1 * r3d1 * r5d1 * r7d1 * r1d2)
