@@ -71,6 +71,15 @@ func processStdin() {
 
 	sort.Ints(ids)
 	fmt.Println(ids)
+
+	p := 0
+	for _, c := range ids {
+		if p == (c - 2) {
+			fmt.Println(p, c)
+			return
+		}
+		p = c
+	}	
 }
 
 func main() {
